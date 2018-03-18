@@ -3,15 +3,17 @@
 namespace Classes;
 
 use splitbrain\phpcli\CLI;
-
 use splitbrain\phpcli\Options;
 
 class App extends CLI
 {
     const COMMAND_PARSE = 'parse';
+
     const ARGUMENT_FILE = 'file';
     const ARGUMENT_AGE_FROM = 'ageFrom';
     const ARGUMENT_AGE_TO = 'ageTo';
+
+    const OPTION_FORMATTED = 'formatted';
 
     /**
      * {@inheritdoc}
@@ -24,7 +26,7 @@ class App extends CLI
         $options->registerArgument(self::ARGUMENT_AGE_FROM, 'Min Age for filtering', true, self::COMMAND_PARSE);
         $options->registerArgument(self::ARGUMENT_AGE_TO, 'Max Age for filtering', true, self::COMMAND_PARSE);
 
-        $options->registerOption('formatted', 'Output result should be formatted', 'f');
+        $options->registerOption(self::OPTION_FORMATTED, 'Output result should be formatted', 'f');
     }
 
     /**
@@ -49,7 +51,7 @@ class App extends CLI
     private function filterUsers(Options $options)
     {
         $arguments = $options->getArgs();
-        $formattedOutput = $options->getOpt('formatted');
+        $formattedOutput = $options->getOpt(self::OPTION_FORMATTED);
 
         $parser = new Parser($arguments[0]);
 

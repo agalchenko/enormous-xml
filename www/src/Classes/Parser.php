@@ -34,6 +34,9 @@ class Parser
         $this->file = $file;
     }
 
+    /**
+     * Handle an input file.
+     */
     public function handle()
     {
         $this->readFile();
@@ -76,10 +79,11 @@ class Parser
         $this->fileObject = simplexml_load_file($this->file);
     }
 
+    /**
+     * Validate input XML file structure.
+     */
     private function validate()
     {
-        // TODO: add file validation
-
         $this->isValid = true;
 
         if (count(libxml_get_errors()) > 0) {
@@ -89,6 +93,9 @@ class Parser
         }
     }
 
+    /**
+     * Transform xml file data to array.
+     */
     private function parse()
     {
         $fileData = json_decode(json_encode($this->fileObject), true);
